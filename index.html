@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Red Button Interface</title>
+    <style>
+        body {
+            background-color: #000000;     /* Black background */
+            display: flex;                 /* Center elements vertically/horizontally */
+            justify-content: center;       /* Horizontal alignment */
+            align-items: center;           /* Vertical alignment */
+            height: 100vh;                 /* Full viewport height */
+            margin: 0;                     /* Remove default margins */
+        }
+        
+        .button-container {
+            text-align: center;            /* Align buttons centrally */
+        }
+        
+        a.button-link {
+            display: inline-block;         /* Allow styling as a block-level element */
+            padding: 15px 30px;           /* Spacing around the text */
+            border-radius: 5px;            /* Softened corners */
+            background-color: transparent; /* No background fill */
+            color: #ff0000;                /* Red text */
+            font-size: 24px;               /* Larger font size */
+            cursor: pointer;               /* Pointer cursor for interactivity */
+            transition: transform 0.3s ease-in-out; /* Smooth animation effect */
+            text-decoration: none;         /* Remove underline from links */
+        }
+        
+        a.button-link:hover {
+            transform: scale(1.1);         /* Scale up slightly on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="button-container">
+    <a href="your_file_path_here.html" target="_blank" class="button-link">Hz1</a>
+</div>
+</body>
+</html>
