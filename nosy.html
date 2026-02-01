@@ -20,22 +20,39 @@
             font-family: serif; /* Use serif font */
         }
 
-        /* Style the full-screen button */
-        #triggerButton {
+        /* Overlay instruction layer */
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: 1000;      /* Ensure it stays above everything else */
-            cursor: pointer;    /* Change cursor appearance */
-            opacity: 0;         /* Hide the button visually */
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .overlay p {
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* Fade animation class */
+        .fadeOut {
+            opacity: 0 !important;
+            visibility: hidden;
         }
     </style>
 </head>
 <body>
-    <!-- Hidden full-screen button covering the entire viewport -->
-    <div id="triggerButton"></div>
+    <!-- Overlay with instructional text -->
+    <div class="overlay">
+        <p>Please click to focus on this window for the website to load.</p>
+    </div>
 
     <!-- Audio tag WITHOUT controls -->
     <audio id="myAudio" autoplay loop>
@@ -48,9 +65,10 @@
     <script>
         // Reference to the audio element
         let myAudio = document.getElementById("myAudio");
+        let overlay = document.querySelector(".overlay");
 
-        // Add event listener to the full-screen button
-        document.getElementById("triggerButton").addEventListener("click", function(event) {
+        // Add event listener to the body (to capture clicks)
+        document.body.addEventListener("click", function(event) {
             // Prevent default actions
             event.preventDefault();
 
@@ -61,9 +79,18 @@
                 console.error("Error starting audio:", err.message);
             });
 
-            // Remove the button after being clicked
-            this.parentNode.removeChild(this);
+            // Fade out the overlay
+            overlay.classList.add("fadeOut");
         });
+
+        // Verify audio status every second (optional safeguard)
+        setInterval(() => {
+            if (!myAudio.paused && myAudio.readyState > 0) {
+                console.log("Audio is actively playing...");
+            } else {
+                console.warn("Audio seems paused or unavailable!");
+            }
+        }, 1000);
     </script>
 </body>
 </html>
